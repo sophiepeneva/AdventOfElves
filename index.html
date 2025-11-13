@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Elves' Secret Police Advent Calendar 🎁</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ELVES' SECRET POLICE</h1>
+        <h2>Operation: Christmas spirit resque</h2>
+        <p>Enter the correct code to access the daily surveillance report.</p>
+    </header>
+
+    <div class="calendar-grid">
+        <button class="present" data-day="1"><span>1</span></button>
+        <button class="present" data-day="2"><span>2</span></button>
+        <button class="present" data-day="3"><span>3</span></button>
+        <button class="present" data-day="4"><span>4</span></button>
+        <button class="present" data-day="5"><span>5</span></button>
+        <button class="present" data-day="6"><span>6</span></button>
+        <button class="present" data-day="7"><span>7</span></button>
+        <button class="present" data-day="8"><span>8</span></button>
+        <button class="present" data-day="9"><span>9</span></button>
+        <button class="present" data-day="10"><span>10</span></button>
+        <button class="present" data-day="11"><span>11</span></button>
+        <button class="present" data-day="12"><span>12</span></button>
+        <button class="present" data-day="13"><span>13</span></button>
+        <button class="present" data-day="14"><span>14</span></button>
+        <button class="present" data-day="15"><span>15</span></button>
+        <button class="present" data-day="16"><span>16</span></button>
+        <button class="present" data-day="17"><span>17</span></button>
+        <button class="present" data-day="18"><span>18</span></button>
+        <button class="present" data-day="19"><span>19</span></button>
+        <button class="present" data-day="20"><span>20</span></button>
+        <button class="present" data-day="21"><span>21</span></button>
+        <button class="present" data-day="22"><span>22</span></button>
+        <button class="present" data-day="23"><span>23</span></button>
+        <button class="present" data-day="24"><span>24</span></button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body">
+                <h3>Enter Elves' Secret Code for Day <span id="current-day"></span></h3>
+                <input type="text" id="secret-code" placeholder="Enter code">
+                <button id="submit-code">Unlock Report</button>
+                <p id="message"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

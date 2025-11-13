@@ -1,0 +1,260 @@
+/* General Christmassy Styling */
+:root {
+    --christmas-red: #B30000;
+    --christmas-green: #006600;
+    --gold: #FFD700;
+    --snow-white: #F0F8FF;
+    --font-family: 'Georgia', serif;
+}
+body {
+    background-color: #0d1e2e; /* A dark blue fallback color */
+    background-image: url('background.png'); /* Your new background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-attachment: fixed; /* Keep the background fixed when scrolling */
+    background-position: center center; /* Center the image */
+    color: var(--snow-white);
+    font-family: var(--font-family);
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add a semi-transparent overlay to make text more readable against the detailed background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
+    z-index: -1; /* Place it behind content but above the background image */
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--gold);
+    font-size: 3.5em; /* Slightly larger */
+    text-shadow: 4px 4px var(--christmas-red); /* Stronger shadow */
+    margin-bottom: 10px;
+}
+
+header h2 {
+    color: var(--snow-white);
+    font-style: italic;
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+header p {
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: 10px auto;
+}
+
+/* Calendar Grid Styling */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns wide */
+    gap: 20px; /* Increased gap */
+    max-width: 1000px; /* Wider grid */
+    margin: 40px auto;
+    padding: 20px; /* More padding */
+    background-color: rgba(0, 0, 0, 0.3); /* Darker semi-transparent border effect */
+    border: 6px solid var(--gold); /* Thicker border */
+    border-radius: 15px; /* More rounded */
+}
+
+/* Present Button Styling */
+.present {
+    background-image: url('present.png'); /* Our new 2D image! */
+    background-size: contain; /* 'contain' will make sure the whole image is visible */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; /* Ensure button background is transparent */
+
+    width: 150px; /* Set a fixed width */
+    height: 150px; /* Set a fixed height */
+    padding: 0;
+    
+    border: none;
+    border-radius: 10px; /* Still apply a border radius for overall button shape */
+    cursor: pointer;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Ensure no text selection on buttons */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.present:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.9);
+}
+
+.present span {
+    position: absolute;
+    /* Adjust these values to perfectly center the number on the ribbon tag of the new image */
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    color: #ffffff; /* Dark brown for the number to stand out on the tag */
+    text-shadow: 1px 1px 2px rgba(177, 147, 147, 0.5); /* Slight white shadow for contrast */
+    font-size: 1.7em; /* Adjust font size for the number */
+    font-family: 'Times New Roman', serif; /* A classic font for the number */
+    font-weight: 900;
+    z-index: 2; /* Ensure number is above background image */
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+    padding-top: 50px;
+    backdrop-filter: blur(5px); /* Add a subtle blur to the background */
+}
+
+.modal-content {
+    background-color: var(--christmas-red);
+    margin: 5% auto;
+    padding: 40px; /* More padding */
+    border: 6px solid var(--gold); /* Thicker border */
+    width: 90%;
+    max-width: 650px; /* Slightly wider modal */
+    border-radius: 20px; /* More rounded */
+    box-shadow: 0 0 30px var(--gold); /* Stronger glow */
+}
+
+.close-button {
+    color: var(--snow-white);
+    float: right;
+    font-size: 32px; /* Larger close button */
+    font-weight: bold;
+    background: none; /* Ensure no background interference */
+    border: none;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--gold);
+}
+
+#modal-body h3 {
+    font-size: 1.8em;
+    color: var(--snow-white);
+    margin-bottom: 25px;
+}
+
+#secret-code {
+    padding: 12px; /* Larger input field */
+    margin: 20px 0;
+    width: 80%;
+    border-radius: 8px; /* More rounded */
+    border: 3px solid var(--christmas-green); /* Thicker border */
+    font-size: 1.2em;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+#submit-code {
+    background-color: var(--christmas-green);
+    color: var(--snow-white);
+    border: none;
+    padding: 12px 25px; /* Larger button */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#submit-code:hover {
+    background-color: #004d00;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+#message {
+    font-weight: bold;
+    margin-top: 25px;
+    font-size: 1.2em;
+    color: var(--gold);
+}
+
+/* Responsive adjustment */
+@media (max-width: 1024px) {
+    .calendar-grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 columns for slightly smaller screens */
+        max-width: 800px;
+    }
+    .present {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for tablets */
+        max-width: 600px;
+        gap: 15px;
+    }
+    .present {
+        width: 110px;
+        height: 110px;
+        font-size: 2em;
+    }
+    header h1 {
+        font-size: 2.5em;
+    }
+    header h2 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for mobile */
+        max-width: 400px;
+        gap: 10px;
+        padding: 10px;
+    }
+    .present {
+        width: 100px;
+        height: 100px;
+        font-size: 1.8em;
+    }
+    .present span {
+         font-size: 1.8em; /* Adjust number size for smaller presents */
+    }
+    header h1 {
+        font-size: 2em;
+    }
+    header h2 {
+        font-size: 1em;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    #secret-code {
+        width: 90%;
+    }
+}
