@@ -1,13 +1,34 @@
 // --- Configuration ---
 
-// The array of 24 unique passwords, indexed from 0 to 23.
-// Day 1 corresponds to index 0 (0000), Day 24 corresponds to index 23 (0023).
+// The array of 24 unique passwords. Each entry is now an array of possible correct codes.
+// Day 1 corresponds to index 0, Day 24 corresponds to index 23.
 const CORRECT_PASSWORDS = [
-    "0000", "0001", "0002", "0003", "0004", "0005",
-    "0006", "0007", "0008", "0009", "0010", "0011",
-    "0012", "0013", "0014", "0015", "0016", "0017",
-    "0018", "0019", "0020", "0021", "0022", "0023"
+    ["CLARA"], // Day 1
+    ["CHILLI", "CHILLI PEPPER", "PEPPER", "HOT CHILLI", "HOT CHILLI PEPPER"], // Day 2 (Example of multiple answers)
+    ["KISS"], // Day 3
+    ["9876"], // Day 4
+    ["VILLAELF"], // Day 5
+    ["MEDAL", "LOCKET", "STAR", "MEDALLION"], // Day 6
+    ["GALAHAD"], // Day 7
+    ["ROSE"], // Day 8
+    ["2518"], // Day 9
+    ["MARKET"], // Day 10
+    ["GRINCH"], // Day 11
+    ["GATO"], // Day 12
+    ["11128"], // Day 13
+    ["BERRIES", "PLANT"], // Day 14
+    ["0014"], // Day 15
+    ["HIDE"], // Day 16
+    ["51181"], // Day 17
+    ["lego"], // Day 18
+    ["SPIDER"], // Day 19
+    ["9591"], // Day 20
+    ["159.69.92.34"], // Day 21
+    ["BUSTED"], // Day 22
+    ["1526"], // Day 23
+    ["FIRE"] // Day 24
 ];
+
 
 // NEW SUCCESS MESSAGE
 const MESSAGE_SUCCESS = "ACCESS GRANTED! The Elves' Secret Police successfully prevented the Grinch's plan for the day! Report filed.";
@@ -21,21 +42,60 @@ const submitCodeButton = document.getElementById('submit-code');
 const secretCodeInput = document.getElementById('secret-code');
 const currentDaySpan = document.getElementById('current-day');
 const messageParagraph = document.getElementById('message');
-// Removed the reference to revealVideo, as it's no longer needed in JS
 
 let activeDay = null; // To store which present/day is currently open (1 to 24)
 
-// Function to open the modal
+// --- Persistence Functions ---
+
+// 1. Function to retrieve the list of unlocked days from local storage
+function getUnlockedDays() {
+    const unlockedDaysString = localStorage.getItem('unlockedDays');
+    return unlockedDaysString ? JSON.parse(unlockedDaysString) : [];
+}
+
+// 2. Function to add a day to the unlocked list and save it
+function setDayAsUnlocked(day) {
+    const unlockedDays = getUnlockedDays();
+    const dayString = String(day);
+    if (!unlockedDays.includes(dayString)) {
+        unlockedDays.push(dayString);
+        localStorage.setItem('unlockedDays', JSON.stringify(unlockedDays));
+    }
+}
+
+// 3. Function run on page load to apply saved states
+function initializeCalendarState() {
+    const unlockedDays = getUnlockedDays();
+    presents.forEach(present => {
+        const day = present.getAttribute('data-day');
+        if (unlockedDays.includes(day)) {
+            present.classList.add('unlocked');
+        }
+    });
+}
+
+
+// Function to open the modal (Added logic to check if already unlocked)
 function openModal(day) {
     activeDay = day;
     currentDaySpan.textContent = day;
     secretCodeInput.value = ''; // Clear previous input
     messageParagraph.textContent = ''; // Clear previous message
     
-    // Ensure input field and submit button are visible if they were hidden previously
-    document.getElementById('secret-code').style.display = 'block';
-    document.getElementById('submit-code').style.display = 'block';
-    
+    const presentElement = document.querySelector(`[data-day="${day}"]`);
+
+    // Check if the present is ALREADY unlocked
+    if (presentElement.classList.contains('unlocked')) {
+        messageParagraph.textContent = MESSAGE_SUCCESS; // Show success message
+        messageParagraph.style.color = '#00FF00';
+        document.getElementById('secret-code').style.display = 'none';
+        document.getElementById('submit-code').style.display = 'none';
+    } else {
+        // If not unlocked, show input and button
+        document.getElementById('secret-code').style.display = 'block';
+        document.getElementById('submit-code').style.display = 'block';
+    }
+
     // Hide the video element's container if it was showing a video (optional cleanup)
     const videoElement = document.getElementById('reveal-video');
     if (videoElement) {
@@ -50,28 +110,33 @@ function openModal(day) {
 // Function to close the modal
 function closeModal() {
     modal.style.display = 'none';
-    // No video pause/rewind necessary
     activeDay = null;
 }
 
-// Function to check the password (Simplified Logic)
+// Function to check the password (Combined with persistence logic)
 function checkPassword() {
-    const enteredCode = secretCodeInput.value.trim();
+    const enteredCode = secretCodeInput.value.trim().toUpperCase();
     
     const dayNumber = parseInt(activeDay, 10);
     const passwordIndex = dayNumber - 1;
-    const correctPassword = CORRECT_PASSWORDS[passwordIndex];
+    const correctPasswordsArray = CORRECT_PASSWORDS[passwordIndex]; // This is now an array
 
-    if (enteredCode === correctPassword) {
+    if (correctPasswordsArray.includes(enteredCode)) { // Checking against the array
         messageParagraph.textContent = MESSAGE_SUCCESS;
         messageParagraph.style.color = '#00FF00'; // Green success color
+
+        // --- NEW PERSISTENCE CODE ---
+        // 1. Add the unlocked class to the present element
+        const presentElement = document.querySelector(`[data-day="${activeDay}"]`);
+        presentElement.classList.add('unlocked');
+        
+        // 2. Save the unlocked state to local storage
+        setDayAsUnlocked(activeDay);
+        // -----------------------------
 
         // Hide the input field and submit button after success
         document.getElementById('secret-code').style.display = 'none';
         document.getElementById('submit-code').style.display = 'none';
-
-        // Highlight the unlocked present
-        document.querySelector(`[data-day="${activeDay}"]`).classList.add('unlocked');
         
     } else {
         messageParagraph.textContent = MESSAGE_FAILURE;
@@ -83,7 +148,7 @@ function checkPassword() {
     }
 }
 
-// --- Event Listeners (No functional change) ---
+// --- Event Listeners and Initialization ---
 
 presents.forEach(present => {
     present.addEventListener('click', () => {
@@ -104,3 +169,6 @@ window.addEventListener('click', (event) => {
         closeModal();
     }
 });
+
+// RUN ON PAGE LOAD: Check local storage and apply unlocked classes
+initializeCalendarState();

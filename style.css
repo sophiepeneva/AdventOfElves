@@ -258,3 +258,46 @@ header p {
         width: 90%;
     }
 }
+
+/* --- NEW STYLES: UNLOCKED PRESENT --- */
+
+/* Base style for the unlocked present */
+.present.unlocked {
+    /* Optional: Change the background image to an "opened" or "unwrapped" present image */
+    background-image: url('opened_present.png'); 
+    background-color: transparent;
+    border: 4px solid var(--christmas-green); /* A border to distinguish it */
+    cursor: default; /* Change cursor to indicate it's already solved */
+    box-shadow: 0 0 20px var(--gold); /* Add a shiny, gold glow */
+    transform: none !important; /* Prevent hover scaling on unlocked presents */
+}
+
+/* Optional: Stop the hover effect on unlocked presents */
+.present.unlocked:hover {
+    transform: none; 
+    box-shadow: 0 0 20px var(--gold); /* Maintain the glow but no hover movement */
+}
+
+/* Style the number/span inside the unlocked present */
+.present.unlocked span {
+    /* Visually indicate the number is "solved" */
+    color: var(--gold); /* Change the number color */
+    background-color: rgba(0, 0, 0, 0.4); /* Optional: dark background behind the number */
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 1.5em; /* Slightly smaller or different font size */
+    text-shadow: 1px 1px 5px var(--snow-white);
+}
+
+/* You could also add a checkmark or ribbon overlay */
+.present.unlocked::after {
+    content: '✓'; /* A checkmark or star symbol */
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 2.5em;
+    color: var(--christmas-green);
+    text-shadow: 0 0 5px black;
+    opacity: 0.9;
+    font-weight: bold;
+}
