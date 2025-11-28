@@ -17,10 +17,10 @@ const CORRECT_PASSWORDS = [
     ["GATO"], // Day 12
     ["11128"], // Day 13
     ["BERRIES", "PLANT"], // Day 14
-    ["0014"], // Day 15
+    ["HEART"], // Day 15
     ["HIDE"], // Day 16
     ["51181"], // Day 17
-    ["lego"], // Day 18
+    ["3716"], // Day 18
     ["SPIDER"], // Day 19
     ["9591"], // Day 20
     ["159.69.92.34"], // Day 21
