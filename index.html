@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>ELVES' SECRET POLICE</h1>
-        <h2>Operation: Christmas spirit resque</h2>
-        <p>Enter the correct code to access the daily surveillance report.</p>
-    </header>
+<header>
+    <h1>ELVES' SECRET POLICE</h1>
+    <h2>Operation: Christmas spirit resque</h2>
+    
+    <nav class="game-nav">
+        <button id="tab-calendar" class="active">Surveillance Calendar</button>
+        <button id="tab-puzzle">Evidence Board (Puzzle)</button>
+    </nav>
+    <p>Enter the correct code to access the daily surveillance report.</p>
+</header>
 
+<div id="view-calendar" class="view-section active">
     <div class="calendar-grid">
         <button class="present" data-day="1"><span>1</span></button>
         <button class="present" data-day="2"><span>2</span></button>
@@ -38,6 +44,13 @@
         <button class="present" data-day="22"><span>22</span></button>
         <button class="present" data-day="23"><span>23</span></button>
         <button class="present" data-day="24"><span>24</span></button>
+    </div>
+</div>
+    <div id="view-puzzle" class="view-section" style="display: none;">
+     
+        <div id="puzzle-container">
+            <div id="puzzle-board"></div>
+        </div>
     </div>
 
     <div id="modal" class="modal">
