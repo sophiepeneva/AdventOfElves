@@ -1,32 +1,11 @@
-// --- Configuration ---
-
-// The array of 24 unique passwords. Each entry is now an array of possible correct codes.
-// Day 1 corresponds to index 0, Day 24 corresponds to index 23.
+// --- CONFIGURATION ---
 const CORRECT_PASSWORDS = [
-    ["CLARA"], // Day 1
-    ["CHILLI", "CHILLI PEPPER", "PEPPER", "HOT CHILLI", "HOT CHILLI PEPPER"], // Day 2 (Example of multiple answers)
-    ["KISS"], // Day 3
-    ["9876"], // Day 4
-    ["VILLAELF"], // Day 5
-    ["MEDAL", "LOCKET", "STAR", "MEDALLION"], // Day 6
-    ["GALAHAD"], // Day 7
-    ["ROSE"], // Day 8
-    ["2518"], // Day 9
-    ["MARKET"], // Day 10
-    ["GRINCH"], // Day 11
-    ["GATO"], // Day 12
-    ["11128"], // Day 13
-    ["BERRIES", "PLANT"], // Day 14
-    ["HEART"], // Day 15
-    ["HIDE"], // Day 16
-    ["51181"], // Day 17
-    ["3716"], // Day 18
-    ["SPIDER"], // Day 19
-    ["9591"], // Day 20
-    ["159.69.92.34"], // Day 21
-    ["BUSTED"], // Day 22
-    ["1526"], // Day 23
-    ["FIRE"] // Day 24
+    ["CLARA"], ["CHILLI", "CHILLI PEPPER", "PEPPER", "HOT CHILLI"], ["KISS"], ["9876"],
+    ["VILLAELF"], ["MEDAL", "LOCKET", "STAR"], ["GALAHAD"], ["ROSE"],
+    ["2518"], ["MARKET"], ["GRINCH"], ["GATO"],
+    ["11128"], ["BERRIES", "PLANT"], ["HEART"], ["HIDE"],
+    ["51181"], ["3716"], ["SPIDER"], ["9591"],
+    ["159.69.92.34"], ["BUSTED"], ["1526"], ["FIRE"]
 ];
 
 const PUZZLE_IMAGE_SRC = 'final_puzzle.png'; 
