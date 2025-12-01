@@ -301,3 +301,84 @@ header p {
     opacity: 0.9;
     font-weight: bold;
 }
+
+/* --- NEW: Navigation Tabs --- */
+.game-nav {
+    margin: 20px auto;
+}
+
+.game-nav button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    padding: 10px 20px;
+    font-family: var(--font-family);
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.game-nav button.active, .game-nav button:hover {
+    background-color: var(--gold);
+    color: var(--christmas-red);
+}
+
+.view-section {
+    width: 100%;
+    /* display is managed by JS */
+}
+
+/* --- NEW: Puzzle Board --- */
+#puzzle-container {
+    position: relative;
+    width: 100%; /* Fill the width of the screen */
+    height: 80vh; /* Fill 80% of the screen height */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background to see pieces better */
+    border: 4px dashed var(--gold);
+    overflow: hidden; /* Keep pieces inside */
+    margin-top: 20px;
+}
+
+.puzzle-piece {
+    position: absolute;
+    /* Bright border to PROVE the piece exists even if image is invisible */
+    border: 2px solid #00FF00; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+    cursor: grab;
+    z-index: 10; /* Ensure it floats above the board */
+    background-color: red; /* Fallback color if image fails */
+}
+
+.puzzle-piece:active {
+    cursor: grabbing;
+    z-index: 100 !important;
+    transform: scale(1.05);
+    border-color: white;
+}
+
+.game-nav {
+    display: flex; /* Forces them to appear in a row */
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    position: relative; /* Ensures z-index works */
+    z-index: 10; 
+}
+
+.game-nav button {
+    background-color: #B30000; /* Red background */
+    color: #FFD700; /* Gold text */
+    border: 2px solid #FFD700;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.game-nav button.active {
+    background-color: #FFD700; /* Gold background for active */
+    color: #B30000; /* Red text */
+}
